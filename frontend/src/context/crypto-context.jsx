@@ -14,7 +14,7 @@ export function CryptoContextProvider({ children }) {
     const [crypto, setCrypto] = useState([]);
     const [assets, setAssets] = useState([]);
 
-    function mapAssets(asset, result) {
+    function mapAssets(assets, result) {
         return assets.map(asset => {
             const coin = result.find(c => c.id === asset.id) || {};
                 return {
@@ -22,6 +22,7 @@ export function CryptoContextProvider({ children }) {
                     growPercent: percentDifference(asset.price, coin.price || asset.price),
                     totalAmount: asset.amount * (coin.price || asset.price),
                     totalProfit: asset.amount * (coin.price || asset.price) - asset.amount * asset.price,
+                    name: coin.name,
                     ...asset,
                 };
         })
